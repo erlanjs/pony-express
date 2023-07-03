@@ -7,8 +7,6 @@ import { useReactToPrint } from "react-to-print";
 
 export default function BasicButtonPrint({ children, textForBtn }) {
   const componentRef = useRef();
-  const widthPrintIcon = 20;
-  const heightPrintIcon = 18;
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
