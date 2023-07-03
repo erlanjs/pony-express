@@ -11,37 +11,41 @@ export default function Document({ data, setData, type, disabled }) {
   const img =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACxElEQVR4nO2ZXYiNQRjHf5ujZK1SW1zInVwoyVfWnr0g5d6S8pULNy4kV5QtZXOlFNshFwrhrLizJ5FcSApJUtrkQtZBaX3cLKt1Xk3N0ZwxM2feF+e8T/nV09s575yZ578z88zzzMJ/MrEIOAk8Aa4ilP3AdyDR9gWB7DIE1O0xwpgDjDuEDCOMfQ4RygYRxm2PkJ0IY9wjpAdBzPOIUNaNINZ6RHxEGHs8Qh4gjBMeIRcRxk2PkMMI47VHyFYE0QnUPEJWIojlgdCr0hYxbPOI+IAwBj1C7iOMax4h51vlQJ9Osau6EKrqz+r7NDzzCBnI4FM3sBrYARwBLgOPgE/AHbtxATgd2KDKTgHTIgZWfX3z9LEl4GyPx9mQT+oP3UAzEXUrRQhZGPj9Mt1mL1COdDYJmOrjF33Wy+s61nfq54jxrhaxzDYFBp6t2/yJ84nhS0M5MGyJcDESKFMXANuBM8DzwMDvItL7JIWpXK6BqvFyhUfIKqPNe2A3cAF4FRhoDVA0Pt9tkt4nkfYDOAZ02E5OGo26PEK6MgxYtJbt2SbpfdLEpoAbQK/Hx9QzktUONknvE8O+Ak/1Rd5RHe3m0oSy0YHaCy4qf0FIv+7rllUt3tP76wCwGVgcGeZ/w1zHdTFqBmbpZyXDEnB9r8KyYgOwFJjJP6CUIfQ91NPer+911dTP8KQnL2gRhUgxL4FDwPxAX+bSqdtxWkyvTg/G9BJRm25Un/xFV8izUO/fOoSsQxhLHCI+A9MRxoBDyBWE0aH3kC1EpS+iWO8JxaKuR+2D1bSxjMVZW1Ap/0TE2VPSoT63bExxmMYUZ23jXIriLAllsO1m1BLhwhSjDt1cMpGyFHhDTplKWZypW5ZcUk05Iyok55KyVc+4qEj4Z08xRXFW0xcTuaUUeY4MkXMKEWKG8n6y+4qzSf28lPflRB74CXQ4LuHpdPX/AAAAAElFTkSuQmCC";
   return (
-    <div>
-      <div className="flex items-center justify-between">
-        <div className="flex gap-9 items-center ">
-          <div className="flex flex-col  w-full">
+    <div className="w-full mt-4">
+      <div className="w-full flex items-center justify-between  pr-[60px]">
+        <div className="flex  items-center justify-between ">
+          <div className="flex flex-col text-[12px] whitespace-nowrap  w-[250px]">
             <span>inv</span>
             <span>Распечатана: {getCurrentDate(".")}</span>
             <span>Накладная (перевозочный документ)</span>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col w-[250px]">
             {/* <h1 className=" text-4xl font-bold whitespace-nowrap">
               28-6821-9409
             </h1> */}
             <input
               type="text"
               disabled={disabled}
-              className=" outline-none text-4xl font-bold whitespace-nowrap w-[300px]"
-              style={{ lineHeight: "0px" }}
+              placeholder="Введите номер документа"
+              className=" outline-none text-2xl font-bold whitespace-nowrap w-[300px]"
+              style={{
+                lineHeight: "0px",
+                fontSize: data.barcode ? "1.5rem" : "1rem",
+              }}
               value={data?.barcode}
               onChange={(e) => setData({ ...data, barcode: e.target.value })}
             />
           </div>
         </div>
-        <div className="flex items-center gap-9">
+
+        <div className="flex items-center justify-between gap-4 w-[500px]">
           <div>
-            <Barcode value={data?.barcode} width={1.5} height={50} />
+            <Barcode value={data?.barcode || " "} width={1} height={40} />
           </div>
-          <div className="flex flex-col w-[200px]">
-            <img src={logo} alt="pony-express-logo" className=" " />
-          </div>
+          <img src={logo} alt="pony-express-logo " className="w-[150px] " />
         </div>
       </div>
+
       <div className="flex mt-4">
         <div className="w-[100%]">
           <div
@@ -52,17 +56,17 @@ export default function Document({ data, setData, type, disabled }) {
             }}
           >
             <div
-              className="  w-[300px] h-[50px] flex flex-col"
+              className="w-[125px] h-[50px] flex flex-col"
               style={{
                 borderRight: "1px solid #148B5A",
                 borderLeft: "2px solid #148B5A",
               }}
             >
-              <span className="text-[#148B5A] text-sm pl-2 w-full">Дата</span>
+              <span className="text-[#148B5A] text-xs pl-2 w-full">Дата</span>
               <input
                 type="date"
                 disabled={disabled}
-                className="w-[142px] pl-3 outline-none text-xl"
+                className="w-full pl-1 outline-none text-md"
                 value={data.date}
                 onChange={(e) => {
                   console.log(e.target.value);
@@ -72,51 +76,51 @@ export default function Document({ data, setData, type, disabled }) {
             </div>
 
             <div
-              className=" w-[300px] h-[50px]"
+              className=" w-[150px] h-[50px]"
               style={{
                 borderRight: "1px solid #148B5A",
                 borderLeft: "1px solid #148B5A",
               }}
             >
-              <span className="text-[#148B5A] text-sm pl-2">Время</span>
+              <span className="text-[#148B5A] text-xs pl-2">Время</span>
               <input
                 type="text"
                 disabled={disabled}
-                className="pl-5  w-[142px] outline-none text-xl"
+                className="pl-5  w-[112px] outline-none text-md"
                 value={data?.time}
                 style={{ lineHeight: "0px" }}
                 onChange={(e) => setData({ ...data, time: e.target.value })}
               />
             </div>
             <div
-              className="  w-[300px] h-[50px]"
+              className="  w-[120px] h-[50px]"
               style={{
                 borderRight: "1px solid #148B5A",
                 borderLeft: "1px solid #148B5A",
               }}
             >
-              <span className="text-[#148B5A] text-sm pl-2">ORG</span>
+              <span className="text-[#148B5A] text-xs pl-2">ORG</span>
               <input
                 type="text"
                 disabled={disabled}
-                className="pl-5 w-[142px] outline-none text-xl"
+                className="pl-5 w-[102px] outline-none text-md"
                 value={data?.ORG}
                 style={{ lineHeight: "0px" }}
                 onChange={(e) => setData({ ...data, ORG: e.target.value })}
               />
             </div>
             <div
-              className=" w-[300px] h-[50px]"
+              className=" w-[120px] h-[50px]"
               style={{
                 borderRight: "2px solid #148B5A",
                 borderLeft: "1px solid #148B5A",
               }}
             >
-              <span className="text-[#148B5A] text-sm pl-2">DEST</span>
+              <span className="text-[#148B5A] text-xs pl-2">DEST</span>
               <input
                 type="text"
                 disabled={disabled}
-                className="pl-5 w-[142px] outline-none text-xl"
+                className="pl-5 w-full outline-none text-md"
                 style={{ lineHeight: "0px" }}
                 value={data?.DEST}
                 onChange={(e) => setData({ ...data, DEST: e.target.value })}
@@ -134,48 +138,46 @@ export default function Document({ data, setData, type, disabled }) {
                 }}
               >
                 <div
-                  className="w-[300px] h-[50px] bg-[#148B5A] flex justify-center items-center"
+                  className="w-[325px] h-[40px] bg-[#148B5A] flex justify-center items-center"
                   style={{
                     borderRight: "1px solid #148B5A",
                     borderLeft: "2px solid #148B5A",
                   }}
                 >
-                  <span className="text-white text-[18px] font-bold pl-2 ml-[-8px]">
+                  <span className="text-white text-[13px] font-bold pl-2 ml-[-8px]">
                     ОТПРАВИТЕЛЬ
                   </span>
                 </div>
 
                 <div
-                  className="  w-[300px] h-[50px]"
+                  className="flex flex-col  w-[200px] h-[40px]"
                   style={{
                     borderRight: "1px solid #148B5A",
                     borderLeft: "1px solid #148B5A",
                   }}
                 >
-                  <span className="text-[#148B5A] text-sm pl-2">Код</span>
+                  <span className="text-[#148B5A]  text-xs pl-2">Код</span>
                   <input
                     disabled={disabled}
                     type="text"
-                    className="pl-5 w-[142px] outline-none text-xl"
+                    className="pl-5 w-[142px] outline-none text-md"
                     style={{ lineHeight: "0px" }}
                     value={data?.code}
                     onChange={(e) => setData({ ...data, code: e.target.value })}
                   />
                 </div>
-
                 <div
-                  className="  w-[600px] h-[50px]"
+                  className="flex flex-col  w-[600px] h-[40px]"
                   style={{
                     borderRight: "2px solid #148B5A",
                     borderLeft: "1px solid #148B5A",
                   }}
                 >
-                  <span className="text-[#148B5A] text-sm pl-2">Ф.И.О.</span>{" "}
-                  <br />
+                  <span className="text-[#148B5A]  text-xs pl-2">Ф.И.О.</span>
                   <input
                     disabled={disabled}
                     type="text"
-                    className="pl-5 w-full outline-none text-xl"
+                    className="pl-5 w-[142px] outline-none text-md"
                     style={{ lineHeight: "0px" }}
                     value={data?.fullName}
                     onChange={(e) =>
@@ -183,6 +185,28 @@ export default function Document({ data, setData, type, disabled }) {
                     }
                   />
                 </div>
+
+                {/* <div
+                  className="flex flex-col  w-[600px] h-[40px]"
+                  style={{
+                    borderRight: "2px solid #148B5A",
+                    borderLeft: "1px solid #148B5A",
+                    borderBottom: "1px solid #148B5A",
+                  }}
+                >
+                  <span className="text-[#148B5A] text-xs pl-2">Ф.И.О.</span>{" "}
+                  <br />
+                  <input
+                    disabled={disabled}
+                    type="text"
+                    className="pl-5 w-full outline-none text-md"
+                    style={{ lineHeight: "0px" }}
+                    value={data?.fullName}
+                    onChange={(e) =>
+                      setData({ ...data, fullName: e.target.value })
+                    }
+                  />
+                </div> */}
               </div>
               <div
                 className="flex w-[50%]"
@@ -198,11 +222,11 @@ export default function Document({ data, setData, type, disabled }) {
                     borderLeft: "1px solid #148B5A",
                   }}
                 >
-                  <span className="text-[#148B5A] text-sm pl-2">Компания</span>
+                  <span className="text-[#148B5A] text-xs pl-2">Компания</span>
                   <input
                     type="text"
                     disabled={disabled}
-                    className="pl-5 w-full outline-none text-xl"
+                    className="pl-5 w-full outline-none text-md"
                     style={{ lineHeight: "0px" }}
                     value={data?.company}
                     onChange={(e) =>
@@ -220,11 +244,11 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "2px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">Индекс</span>
+                <span className="text-[#148B5A] text-xs pl-2">Индекс</span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.index}
                   onChange={(e) => setData({ ...data, index: e.target.value })}
@@ -237,14 +261,14 @@ export default function Document({ data, setData, type, disabled }) {
                   borderRight: "2px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">Телефон</span>
-                <span className="text-[#148B5A] text-sm pl-2">
+                <span className="text-[#148B5A] text-xs pl-2">Телефон</span>
+                <span className="text-[#148B5A] text-xs pl-2">
                   (50 символ.)
                 </span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.phone}
                   onChange={(e) => setData({ ...data, phone: e.target.value })}
@@ -266,11 +290,11 @@ export default function Document({ data, setData, type, disabled }) {
                   borderRight: "2px solid #148B5A",
                 }}
               >
-                <span className=" text-sm pl-2 text-[#148B5A]">Адрес</span>
+                <span className=" text-xs pl-2 text-[#148B5A]">Адрес</span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.address}
                   onChange={(e) =>
@@ -288,11 +312,11 @@ export default function Document({ data, setData, type, disabled }) {
                   borderRight: "2px solid #148B5A",
                 }}
               >
-                <span className=" text-sm pl-2 text-[#148B5A]">Улица</span>
+                <span className=" text-xs pl-2 text-[#148B5A]">Улица</span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.street}
                   onChange={(e) => setData({ ...data, street: e.target.value })}
@@ -315,7 +339,7 @@ export default function Document({ data, setData, type, disabled }) {
                 }}
               >
                 <span
-                  className=" text-sm pl-2 text-[#148B5A] w-[200px]"
+                  className=" text-xs pl-2 text-[#148B5A] w-[200px]"
                   style={{ lineHeight: "15px" }}
                 >
                   Примечание <br /> отправител <br /> (150 символ.)
@@ -323,7 +347,7 @@ export default function Document({ data, setData, type, disabled }) {
                 <input
                   type="text"
                   disabled={disabled}
-                  className=" w-full outline-none text-xl"
+                  className=" w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.note}
                   onChange={(e) => setData({ ...data, note: e.target.value })}
@@ -342,29 +366,29 @@ export default function Document({ data, setData, type, disabled }) {
                 }}
               >
                 <div
-                  className="w-[300px] h-[50px] bg-[#148B5A] flex justify-center items-center"
+                  className="w-[260px] h-[40px] bg-[#148B5A] flex justify-center items-center"
                   style={{
                     borderRight: "1px solid #148B5A",
                     borderLeft: "2px solid #148B5A",
                   }}
                 >
-                  <span className="text-white text-[18px] font-bold pl-2 ml-[-8px]">
+                  <span className="text-white text-[13px] font-bold pl-2 ml-[-8px]">
                     ПОЛУЧАТЕЛЬ
                   </span>
                 </div>
 
                 <div
-                  className="  w-[300px] h-[50px]"
+                  className=" flex flex-col w-[300px] h-[40px]"
                   style={{
                     borderRight: "1px solid #148B5A",
                     borderLeft: "1px solid #148B5A",
                   }}
                 >
-                  <span className="text-[#148B5A] text-sm pl-2">Код</span>
+                  <span className="text-[#148B5A] text-xs pl-2">Код</span>
                   <input
                     type="text"
                     disabled={disabled}
-                    className="pl-5 w-full outline-none text-xl"
+                    className="pl-5 w-full outline-none text-md"
                     style={{ lineHeight: "0px" }}
                     value={data?.recipientCode}
                     onChange={(e) =>
@@ -374,17 +398,17 @@ export default function Document({ data, setData, type, disabled }) {
                 </div>
 
                 <div
-                  className="  w-[600px] h-[50px]"
+                  className=" flex flex-col w-[478px] h-[40px]"
                   style={{
                     borderRight: "2px solid #148B5A",
                     borderLeft: "1px solid #148B5A",
                   }}
                 >
-                  <span className="text-[#148B5A] text-sm pl-2">Ф.И.О.</span>
+                  <span className="text-[#148B5A] text-xs pl-2">Ф.И.О.</span>
                   <input
                     type="text"
                     disabled={disabled}
-                    className="pl-5 w-full outline-none text-xl"
+                    className="pl-5 w-full outline-none text-md"
                     style={{ lineHeight: "0px" }}
                     value={data?.recipientFullName}
                     onChange={(e) =>
@@ -404,14 +428,14 @@ export default function Document({ data, setData, type, disabled }) {
                   className="flex items-center  w-[600px] h-[30px]"
                   style={{
                     borderRight: "2px solid #148B5A",
-                    borderLeft: "1px solid #148B5A",
+                    borderLeft: "2px solid #148B5A",
                   }}
                 >
-                  <span className="text-[#148B5A] text-sm pl-2">Компания</span>
+                  <span className="text-[#148B5A] text-xs pl-2">Компания</span>
                   <input
                     type="text"
                     disabled={disabled}
-                    className="pl-5 w-full outline-none text-xl"
+                    className="pl-5 w-full outline-none text-md"
                     style={{ lineHeight: "0px" }}
                     value={data?.recipientCompany}
                     onChange={(e) =>
@@ -429,11 +453,11 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "2px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">Индекс</span>
+                <span className="text-[#148B5A] text-xs pl-2">Индекс</span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.recipientIndex}
                   onChange={(e) =>
@@ -448,14 +472,14 @@ export default function Document({ data, setData, type, disabled }) {
                   borderRight: "2px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">Телефон</span>
-                <span className="text-[#148B5A] text-sm pl-2">
+                <span className="text-[#148B5A] text-xs pl-2">Телефон</span>
+                <span className="text-[#148B5A] text-xs pl-2">
                   (50 символ.)
                 </span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.recipientPhone}
                   onChange={(e) =>
@@ -479,11 +503,11 @@ export default function Document({ data, setData, type, disabled }) {
                   borderRight: "2px solid #148B5A",
                 }}
               >
-                <span className=" text-sm pl-2 text-[#148B5A] ">Адрес</span>
+                <span className=" text-xs pl-2 text-[#148B5A] ">Адрес</span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.recipientAdress}
                   onChange={(e) =>
@@ -506,15 +530,15 @@ export default function Document({ data, setData, type, disabled }) {
                   borderRight: "2px solid #148B5A",
                 }}
               >
-                <span className=" text-sm pl-2 text-[#148B5A]">Улица</span>
+                <span className=" text-xs pl-2 text-[#148B5A]">Улица</span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
-                  value={data?.recipientAdress}
+                  value={data?.recipientStreet}
                   onChange={(e) =>
-                    setData({ ...data, recipientAdress: e.target.value })
+                    setData({ ...data, recipientStreet: e.target.value })
                   }
                 />
               </div>
@@ -531,19 +555,19 @@ export default function Document({ data, setData, type, disabled }) {
                 }}
               >
                 <div
-                  className="w-[300px] h-[50px] bg-[#148B5A] flex justify-center items-center"
+                  className="w-[300px] h-[40px] bg-[#148B5A] flex justify-center items-center"
                   style={{
                     borderRight: "1px solid #148B5A",
                     borderLeft: "2px solid #148B5A",
                   }}
                 >
-                  <span className="text-white text-[18px] font-bold pl-2 ml-[-8px]">
+                  <span className="text-white text-[13px] font-bold pl-2 ml-[-8px]">
                     ОПИСАНИЕ
                   </span>
                 </div>
 
                 <div
-                  className="  w-[300px] h-[50px] flex  "
+                  className="  w-[450px] h-[40px] flex  "
                   style={{
                     borderRight: "1px solid #148B5A",
                     borderLeft: "1px solid #148B5A",
@@ -560,7 +584,7 @@ export default function Document({ data, setData, type, disabled }) {
                       }}
                     />
                     <span
-                      className="text-[#148B5A] text-sm pl-2"
+                      className="text-[#148B5A] text-xs pl-2"
                       style={{ lineHeight: "15px" }}
                     >
                       Только документы
@@ -569,7 +593,7 @@ export default function Document({ data, setData, type, disabled }) {
                 </div>
 
                 <div
-                  className="  w-[600px] h-[50px] flex  "
+                  className="  w-[450px] h-[40px] flex  "
                   style={{
                     borderRight: "2px solid #148B5A",
                     borderLeft: "1px solid #148B5A",
@@ -585,7 +609,7 @@ export default function Document({ data, setData, type, disabled }) {
                         setData({ ...data, dangerousGoods: e.target.checked });
                       }}
                     />
-                    <span className="text-[#148B5A] text-sm pl-2">
+                    <span className="text-[#148B5A] text-xs pl-2">
                       Опасный груз
                     </span>
                   </div>
@@ -606,7 +630,7 @@ export default function Document({ data, setData, type, disabled }) {
                   }}
                 >
                   <span
-                    className=" text-sm pl-2 text-[#148B5A] w-[120px]"
+                    className=" text-xs pl-2 text-[#148B5A] w-[120px] whitespace-nowrap"
                     style={{ lineHeight: "15px" }}
                   >
                     Описание <br /> вложения <br /> (150 символ.)
@@ -615,7 +639,7 @@ export default function Document({ data, setData, type, disabled }) {
                   <input
                     type="text"
                     disabled={disabled}
-                    className="pl-5 w-full outline-none text-xl"
+                    className="pl-5 w-full outline-none text-md"
                     style={{ lineHeight: "0px" }}
                     value={data?.descriptionAttachments}
                     onChange={(e) =>
@@ -642,12 +666,12 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "2px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">Кол-во мест</span>
+                <span className="text-[#148B5A] text-xs pl-2">Кол-во мест</span>
 
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.numberOfSeats}
                   onChange={(e) =>
@@ -666,11 +690,11 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "1px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">Вес (кг)</span>
+                <span className="text-[#148B5A] text-xs pl-2">Вес (кг)</span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.ves}
                   onChange={(e) =>
@@ -688,13 +712,13 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "1px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">
+                <span className="text-[#148B5A] whitespace-nowrap text-xs pl-1">
                   Контр. взвеш. (кг)
                 </span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.weighingAndControl}
                   onChange={(e) =>
@@ -712,11 +736,13 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "1px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">. вес (кг)</span>
+                <span className="text-[#148B5A] text-xs pl-2 whitespace-nowrap">
+                  Объем. вес (кг)
+                </span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.volume}
                   onChange={(e) =>
@@ -741,13 +767,13 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "2px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">
+                <span className="text-[#148B5A] text-[11px] pl-2 whitespace-nowrap">
                   Место, габариты (см.)
                 </span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.gabarite}
                   onChange={(e) =>
@@ -760,13 +786,13 @@ export default function Document({ data, setData, type, disabled }) {
               </div>
 
               <div className="  w-[300px] h-[50px]" style={{}}>
-                <span className="text-[#148B5A] text-sm pl-2">
+                <span className="text-[#148B5A] text-[11px] pl-2 whitespace-nowrap">
                   Место, габариты (см.)
                 </span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.gabarite2}
                   onChange={(e) =>
@@ -783,13 +809,13 @@ export default function Document({ data, setData, type, disabled }) {
                   borderRight: "2px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">
+                <span className="text-[#148B5A] text-[11px] pl-2 whitespace-nowrap">
                   Место, габариты (см.)
                 </span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.gabarite3}
                   onChange={(e) =>
@@ -815,11 +841,11 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "2px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">Услуга</span>
+                <span className="text-[#148B5A] text-[12px] pl-2">Услуга</span>
                 <input
                   type="text"
                   disabled={disabled}
-                  className="pl-5 w-full outline-none text-xl"
+                  className="pl-5 w-full outline-none text-md"
                   style={{ lineHeight: "0px" }}
                   value={data?.service}
                   onChange={(e) =>
@@ -838,7 +864,7 @@ export default function Document({ data, setData, type, disabled }) {
                   borderLeft: "1px solid #148B5A",
                 }}
               >
-                <span className="text-[#148B5A] text-sm pl-2">
+                <span className="text-[#148B5A] text-xs pl-2">
                   Специальные инструкции
                 </span>
                 <input

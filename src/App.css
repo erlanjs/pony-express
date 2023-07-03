@@ -3,10 +3,20 @@
 @tailwind utilities;
 
 .container-box {
-  max-width: 1200px;
+  max-width: 870px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+  /* background: rgb(255, 209, 209); */
+}
+
+.container-print {
+  max-width: 870px;
+
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  /* background: green; */
 }
 
 .input-checkbox {
