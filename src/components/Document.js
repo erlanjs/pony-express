@@ -1,6 +1,6 @@
 // Expternal dependencies
 import Barcode from "react-barcode";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 // local  dependencies
 import logo from "../assets/images/pony-express-logo.png";
@@ -8,6 +8,8 @@ import Task from "./Task";
 import { getCurrentDate } from "../helpers/getCurrentTime";
 
 export default function Document({ data, setData, type, disabled }) {
+  const img =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACxElEQVR4nO2ZXYiNQRjHf5ujZK1SW1zInVwoyVfWnr0g5d6S8pULNy4kV5QtZXOlFNshFwrhrLizJ5FcSApJUtrkQtZBaX3cLKt1Xk3N0ZwxM2feF+e8T/nV09s575yZ578z88zzzMJ/MrEIOAk8Aa4ilP3AdyDR9gWB7DIE1O0xwpgDjDuEDCOMfQ4RygYRxm2PkJ0IY9wjpAdBzPOIUNaNINZ6RHxEGHs8Qh4gjBMeIRcRxk2PkMMI47VHyFYE0QnUPEJWIojlgdCr0hYxbPOI+IAwBj1C7iOMax4h51vlQJ9Osau6EKrqz+r7NDzzCBnI4FM3sBrYARwBLgOPgE/AHbtxATgd2KDKTgHTIgZWfX3z9LEl4GyPx9mQT+oP3UAzEXUrRQhZGPj9Mt1mL1COdDYJmOrjF33Wy+s61nfq54jxrhaxzDYFBp6t2/yJ84nhS0M5MGyJcDESKFMXANuBM8DzwMDvItL7JIWpXK6BqvFyhUfIKqPNe2A3cAF4FRhoDVA0Pt9tkt4nkfYDOAZ02E5OGo26PEK6MgxYtJbt2SbpfdLEpoAbQK/Hx9QzktUONknvE8O+Ak/1Rd5RHe3m0oSy0YHaCy4qf0FIv+7rllUt3tP76wCwGVgcGeZ/w1zHdTFqBmbpZyXDEnB9r8KyYgOwFJjJP6CUIfQ91NPer+911dTP8KQnL2gRhUgxL4FDwPxAX+bSqdtxWkyvTg/G9BJRm25Un/xFV8izUO/fOoSsQxhLHCI+A9MRxoBDyBWE0aH3kC1EpS+iWO8JxaKuR+2D1bSxjMVZW1Ap/0TE2VPSoT63bExxmMYUZ23jXIriLAllsO1m1BLhwhSjDt1cMpGyFHhDTplKWZypW5ZcUk05Iyok55KyVc+4qEj4Z08xRXFW0xcTuaUUeY4MkXMKEWKG8n6y+4qzSf28lPflRB74CXQ4LuHpdPX/AAAAAElFTkSuQmCC";
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -859,10 +861,7 @@ export default function Document({ data, setData, type, disabled }) {
         <Task data={data} setData={setData} type={type} disabled={disabled} />
       </div>
       <div className="p-4 flex items-center border-dashed">
-        <img
-          className="rotate-45 ml-[-30px]"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACxElEQVR4nO2ZXYiNQRjHf5ujZK1SW1zInVwoyVfWnr0g5d6S8pULNy4kV5QtZXOlFNshFwrhrLizJ5FcSApJUtrkQtZBaX3cLKt1Xk3N0ZwxM2feF+e8T/nV09s575yZ578z88zzzMJ/MrEIOAk8Aa4ilP3AdyDR9gWB7DIE1O0xwpgDjDuEDCOMfQ4RygYRxm2PkJ0IY9wjpAdBzPOIUNaNINZ6RHxEGHs8Qh4gjBMeIRcRxk2PkMMI47VHyFYE0QnUPEJWIojlgdCr0hYxbPOI+IAwBj1C7iOMax4h51vlQJ9Osau6EKrqz+r7NDzzCBnI4FM3sBrYARwBLgOPgE/AHbtxATgd2KDKTgHTIgZWfX3z9LEl4GyPx9mQT+oP3UAzEXUrRQhZGPj9Mt1mL1COdDYJmOrjF33Wy+s61nfq54jxrhaxzDYFBp6t2/yJ84nhS0M5MGyJcDESKFMXANuBM8DzwMDvItL7JIWpXK6BqvFyhUfIKqPNe2A3cAF4FRhoDVA0Pt9tkt4nkfYDOAZ02E5OGo26PEK6MgxYtJbt2SbpfdLEpoAbQK/Hx9QzktUONknvE8O+Ak/1Rd5RHe3m0oSy0YHaCy4qf0FIv+7rllUt3tP76wCwGVgcGeZ/w1zHdTFqBmbpZyXDEnB9r8KyYgOwFJjJP6CUIfQ91NPer+911dTP8KQnL2gRhUgxL4FDwPxAX+bSqdtxWkyvTg/G9BJRm25Un/xFV8izUO/fOoSsQxhLHCI+A9MRxoBDyBWE0aH3kC1EpS+iWO8JxaKuR+2D1bSxjMVZW1Ap/0TE2VPSoT63bExxmMYUZ23jXIriLAllsO1m1BLhwhSjDt1cMpGyFHhDTplKWZypW5ZcUk05Iyok55KyVc+4qEj4Z08xRXFW0xcTuaUUeY4MkXMKEWKG8n6y+4qzSf28lPflRB74CXQ4LuHpdPX/AAAAAElFTkSuQmCC"
-        />
+        <img className="rotate-45 ml-[-30px]" src={img} alt="" />
         <div className="w-full border-b-2 border-[#148B5A] border-dashed"></div>
       </div>
     </div>
